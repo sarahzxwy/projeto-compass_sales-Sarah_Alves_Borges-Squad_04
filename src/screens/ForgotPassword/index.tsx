@@ -8,7 +8,6 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 
  function Login({ navigation } : LoginProps ) {
   const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
 
    const handleLogin = () => {
    navigation.navigate('Login');
@@ -24,9 +23,9 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
         <View>
         <View>
         <TextInput 
-        placeholder="Password"
-        value={password}
-        onChange={(text) => setPassword(text.nativeEvent.text)}
+        placeholder="Email"
+        value={email}
+        onChange={(text) => setEmail(text.nativeEvent.text)}
         secureTextEntry={true}/>
         </View>
 

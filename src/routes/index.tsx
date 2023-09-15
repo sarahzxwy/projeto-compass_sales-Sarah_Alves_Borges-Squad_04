@@ -16,7 +16,8 @@ const Stack = createNativeStackNavigator();
               
         <Stack.Screen  name="Login" component={Login} options={{headerShown: false}}/>
         
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
+        <Stack.Screen name='ForgotPassword' component={ForgotPassword}
+        options={{headerBackButtonMenuEnabled: true, headerTransparent: true, headerTitle: ""}}  />
         
       
 

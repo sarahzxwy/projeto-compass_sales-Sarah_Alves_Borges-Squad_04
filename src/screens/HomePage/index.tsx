@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../../FirebaseConfing';
+import { FIREBASE_AUTH } from '../../../FirebaseConfing';
 
 
 interface RouterProps {
@@ -15,9 +15,11 @@ function HomePage({ navigation }: RouterProps) {
     navigation.navigate('Login');
   };
 
+  const username = FIREBASE_AUTH.currentUser?.displayName ||  FIREBASE_AUTH.currentUser?.email;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.HomeTitle}>Welcome, {FIREBASE_AUTH.currentUser?.email}</Text>
+      <Text style={styles.HomeTitle}>Welcome, {username}</Text>
       <Button onPress={handleLogout} title="Logout" />
     </View>
   );

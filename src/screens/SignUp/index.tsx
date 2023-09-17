@@ -4,16 +4,30 @@ import { StackNavigationProp} from "@react-navigation/stack";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../../../FirebaseConfing";
 import {  addDoc, collection } from "firebase/firestore"
+import * as Font from 'expo-font';
 
 interface SignUpProps {
   navigation: StackNavigationProp<any, any>;
 }
+
+const loadFonts = async () => {
+  await Font.loadAsync({
+    Roboto: require('../../../assets/fonts/Roboto-Regular.ttf'),
+    'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
+  });
+};
+
+
 
 function SignUp({ navigation }: SignUpProps) {
   const [username, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadFonts();
+  }, []);
  
   const handleSignUp = async () => {
        try {
@@ -29,7 +43,7 @@ function SignUp({ navigation }: SignUpProps) {
           catch (error: any) {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setErrorMessage("Sign up with a valid email and the password must be at leat 6 characters long.");
+        setErrorMessage("Sign up with a valid email and the password must be at least 6 characters long.");
        };
   
 
@@ -87,11 +101,11 @@ function SignUp({ navigation }: SignUpProps) {
 
       </View>
 
-      <View style={styles.ToLogin}>
+     
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text>Already have an account?</Text>
+          <Text  style={styles.ToLogin}>Already have an account?</Text>
         </TouchableOpacity>
-      </View>
+     
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.SignUpButton}
@@ -108,9 +122,10 @@ export default SignUp;
 const styles = StyleSheet.create({
 
   titleSignUp: {
+    fontFamily: 'Roboto-Bold',
     marginTop: 106,
     marginLeft: 14,
-    fontSize: 24,
+    fontSize: 30,
     width: 116,
     height: 40
   },
@@ -128,6 +143,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginTop: 10,
+    fontSize: 11
   },
 
   inputContainer: {
@@ -152,6 +168,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    fontFamily: 'Roboto-Bold',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
@@ -162,22 +179,26 @@ const styles = StyleSheet.create({
   },
 
   inputpass: {
+    fontFamily: 'Roboto-Bold',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
     marginTop: 18,
-    marginLeft: 20,
+    marginLeft: 50,
     width: 51,
     height: 20,
     color: '#2D2D2D'
   },
 
   ToLogin: {
-    marginLeft: 170,
+    fontFamily: 'Roboto-Bold',
+    left: 170,
     marginTop: 20,
-    width: 161,
+    width: 164,
     height: 40,
-    color: '#222222'
+    color: '#222222',
+    textAlign: 'right',
+    fontWeight: '500'
   },
 
   buttonContainer: {
@@ -194,6 +215,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
+    fontFamily: 'Roboto-Bold',
     color: 'white',
     fontSize: 14,
     fontWeight: '500',

@@ -26,7 +26,7 @@ function Login({ navigation }: LoginProps) {
     signInWithEmailAndPassword(FIREBASE_AUTH, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigation.navigate('HomePage', { username: user.displayName });
+        navigation.navigate('HomePage', { username: FIREBASE_AUTH.currentUser?.displayName });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -88,17 +88,12 @@ function Login({ navigation }: LoginProps) {
 
       </View>
       <View style={styles.ToGo}>
-      <View style={styles.ToSignUp}>
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text>Sign Up</Text>
+          <Text style={styles.ToSignUp}>Sign Up</Text>
         </TouchableOpacity>
-      </View>
-
-      <View style={styles.ToHome}>
         <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-          <Text>Forgot your password?</Text>
+          <Text  style={styles.ToForgotPassword}>Forgot your password?</Text>
         </TouchableOpacity>
-      </View>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -117,9 +112,10 @@ export default Login;
 const styles = StyleSheet.create({
 
   titleLogin: {
+    fontFamily: 'Roboto-Bold',
     marginTop: 106,
     marginLeft: 14,
-    fontSize: 24,
+    fontSize: 30,
     width: 116,
     height: 40
   },
@@ -128,6 +124,7 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginTop: 10,  
+    fontSize: 11
   },
 
   container: {
@@ -162,6 +159,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    fontFamily: 'Roboto-Bold',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
@@ -172,11 +170,12 @@ const styles = StyleSheet.create({
   },
 
   inputpass: {
+    fontFamily: 'Roboto-Bold',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
     marginTop: 18,
-    marginLeft: 20,
+    marginLeft: 50,
     width: 51,
     height: 20,
     color: '#2D2D2D'
@@ -189,11 +188,13 @@ const styles = StyleSheet.create({
   },
 
   ToSignUp: {
+    fontFamily: 'Roboto-Bold',
     width: 161,
     height: 40,
     color: '#222222',
   },
-  ToHome: {
+  ToForgotPassword: {
+    fontFamily: 'Roboto-Bold',
     width: 161,
     height: 40,
     color: '#222222',
@@ -213,6 +214,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
+    fontFamily: 'Roboto-Bold',
     color: 'white',
     fontSize: 14,
     fontWeight: '500',

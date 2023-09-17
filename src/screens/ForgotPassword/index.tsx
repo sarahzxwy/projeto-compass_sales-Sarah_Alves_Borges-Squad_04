@@ -12,12 +12,12 @@ function ForgotPassword(){
   const handleForgotPassword = () => {
     sendPasswordResetEmail(FIREBASE_AUTH, email)
       .then(() => {
-        setSuccessMessage('Password reset email sent. Check your email.');
+        setSuccessMessage('Password reset email sent. Check your email!');
         setErrorMessage(null);
       })
       .catch((error) => {
         const errorMessage = error.message;
-        setErrorMessage('Send a valid email. ex: youname@gmail.com'); 
+        setErrorMessage('Send a valid email. ex: yourname@gmail.com'); 
         setSuccessMessage(null);
       });
   };
@@ -27,9 +27,6 @@ function ForgotPassword(){
       <View style={styles.container}>
         <Text style={styles.titleForgotPassword}>Forgot Password</Text>
       </View>
-      {errorMessage && (
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
-        )}
       <View>
         <Text style={styles.subtit}>
             Please, enter your email address. You will receive a link to create a new password via email.
@@ -49,6 +46,10 @@ function ForgotPassword(){
         {successMessage && (
           <Text style={styles.successMessage}>{successMessage}</Text>
         )}
+
+        {errorMessage && (
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        )}
       </View>
 
       <View style={styles.buttonContainer}>
@@ -67,9 +68,10 @@ export default ForgotPassword;
 const styles = StyleSheet.create({
 
   titleForgotPassword: {
+    fontFamily: 'Roboto-Bold',
     marginTop: 104,
     marginLeft: 14,
-    fontSize: 24,
+    fontSize: 30,
     width: 375,
     height: 154
   },
@@ -78,12 +80,14 @@ const styles = StyleSheet.create({
     color: 'green',
     textAlign: 'center',
     marginTop: 10,
+    fontSize: 11
   },
 
   errorMessage: {
     color: 'red',
     textAlign: 'center',
     marginTop: 10,
+    fontSize: 11
   },
 
   container: {
@@ -92,6 +96,8 @@ const styles = StyleSheet.create({
   },
 
   subtit: {
+    fontFamily: 'Roboto-Bold',
+    fontSize: 14,
     width: 343,
     height: 40,
     top: 75,
@@ -126,18 +132,19 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    fontFamily: 'Roboto-Bold',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
     marginTop: 26,
     width: 51,
-    height: 20,
+    height: 30,
     color: '#2D2D2D',
   },
 
   buttonContainer: {
     padding: 20,
-    marginTop: 40,
+    marginTop: 30,
   },
 
   SendButton: {
@@ -149,6 +156,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
+    fontFamily: 'Roboto-Bold',
     color: 'white',
     fontSize: 14,
     fontWeight: '500',

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import {  signInWithEmailAndPassword } from "firebase/auth"; 
+import { FIREBASE_AUTH } from "../../../FirebaseConfing";
 
 type LoginProps = {
   navigation: any;
@@ -8,10 +10,48 @@ type LoginProps = {
 function Login({ navigation }: LoginProps) {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleLogin = () => {
-    navigation.navigate('HomePage');
+    if (!email || !validateEmail(email)) {
+      setErrorMessage('Please enter a valid email.');
+      return;
+    }
+
+    if (!password || password.length < 6) {
+      setErrorMessage('Password must be at least 6 characters.');
+      return;
+    }
+
+    signInWithEmailAndPassword(FIREBASE_AUTH, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        navigation.navigate('HomePage', { username: user.displayName });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setErrorMessage('Error logging in. Invalid email.');
+      });
   };
+
+  const validateEmail = (email: string) => {
+  
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+
+  useEffect(() => {
+    
+    const unsubscribe = navigation.addListener('focus', () => {
+      setEmail('');
+      setPassword('');
+      setErrorMessage(null); 
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+  
 
   return (
     <View>
@@ -21,11 +61,16 @@ function Login({ navigation }: LoginProps) {
 
       <View style={styles.boxInput}>
 
+      {errorMessage && (
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      )}
+
 
         <View style={styles.inputContainer}>
           <Text style={styles.inputText}>Email</Text>
           <TextInput
             style={styles.input}
+            autoCapitalize="none"
             placeholder="Email"
             value={email}
             onChangeText={(text) => setEmail(text)} />
@@ -34,6 +79,7 @@ function Login({ navigation }: LoginProps) {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.inputpass}
+            autoCapitalize="none"
             placeholder="Password"
             value={password}
             onChange={(text) => setPassword(text.nativeEvent.text)}
@@ -65,6 +111,7 @@ function Login({ navigation }: LoginProps) {
   )
 }
 
+
 export default Login;
 
 const styles = StyleSheet.create({
@@ -75,6 +122,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     width: 116,
     height: 40
+  },
+
+  errorMessage: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 10,  
   },
 
   container: {

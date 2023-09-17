@@ -1,26 +1,35 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { sendPasswordResetEmail } from "firebase/auth";
+import { FIREBASE_AUTH } from "../../../FirebaseConfing";
 
 
-
-type ForgotPasswordProps = {
-  navigation: any;
-}
-
-function ForgotPassword({ navigation }: ForgotPasswordProps) {
+function ForgotPassword(){
   const [email, setEmail] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleForgotPassword = () => {
-    navigation.navigate('Login');
+    sendPasswordResetEmail(FIREBASE_AUTH, email)
+      .then(() => {
+        setSuccessMessage('Password reset email sent. Check your email.');
+        setErrorMessage(null);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setErrorMessage('Send a valid email. ex: youname@gmail.com'); 
+        setSuccessMessage(null);
+      });
   };
-
   return (
     <View>
 
       <View style={styles.container}>
         <Text style={styles.titleForgotPassword}>Forgot Password</Text>
       </View>
-
+      {errorMessage && (
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        )}
       <View>
         <Text style={styles.subtit}>
             Please, enter your email address. You will receive a link to create a new password via email.
@@ -37,7 +46,9 @@ function ForgotPassword({ navigation }: ForgotPasswordProps) {
             value={email}
             onChangeText={(text) => setEmail(text)} />
         </View>
-
+        {successMessage && (
+          <Text style={styles.successMessage}>{successMessage}</Text>
+        )}
       </View>
 
       <View style={styles.buttonContainer}>
@@ -61,6 +72,18 @@ const styles = StyleSheet.create({
     fontSize: 24,
     width: 375,
     height: 154
+  },
+
+  successMessage: {
+    color: 'green',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+
+  errorMessage: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 10,
   },
 
   container: {

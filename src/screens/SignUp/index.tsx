@@ -1,18 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { StackNavigationProp} from "@react-navigation/stack";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { FIREBASE_AUTH, FIREBASE_DB } from "../../../FirebaseConfing";
+import {  addDoc, collection } from "firebase/firestore"
 
-type SignUpProps = {
-  navigation: any;
+interface SignUpProps {
+  navigation: StackNavigationProp<any, any>;
 }
 
 function SignUp({ navigation }: SignUpProps) {
   const [username, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+ 
+  const handleSignUp = async () => {
+       try {
+        const userCredential = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
+        const user = userCredential.user;
 
-  const handleSignUp = () => {
-    navigation.navigate('HomePage');
-  };
+        await addDoc(collection(FIREBASE_DB, 'users'), {
+          uid: user.uid,
+          displayName: username,
+        });
+        navigation.navigate('HomePage', { username });
+       }
+          catch (error: any) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMessage("Sign up with a valid email and the password must be at leat 6 characters long.");
+       };
+  
+
+  }
+
+  useEffect(() => {
+    
+    const unsubscribe = navigation.addListener('focus', () => {
+      setName('');
+      setEmail('');
+      setPassword('');
+      setErrorMessage(null); 
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View>
@@ -21,6 +54,9 @@ function SignUp({ navigation }: SignUpProps) {
       </View>
 
       <View style={styles.boxInput}>
+
+      {errorMessage && (
+        <Text style={styles.errorText}>{errorMessage}</Text> )}
 
         <View style={styles.inputContainer}>
           <Text style={styles.inputText}>Name</Text>
@@ -45,7 +81,7 @@ function SignUp({ navigation }: SignUpProps) {
             style={styles.inputpass}
             placeholder="Password"
             value={password}
-            onChange={(text) => setPassword(text.nativeEvent.text)}
+            onChangeText={(text) => setPassword(text)}
             secureTextEntry={true} />
         </View>
 
@@ -87,6 +123,11 @@ const styles = StyleSheet.create({
   boxInput: {
     marginLeft: 14,
     marginTop: 80
+  },
+
+  errorText: {
+    color: 'red',
+    marginTop: 10,
   },
 
   inputContainer: {

@@ -1,7 +1,7 @@
 
 # Compass-Sales App - React Native
 
-This is a React Native application project called Compass-Sales, developed using Expo. The app integrates authentication functionalities using Firebase and Firestore. It includes pages for user registration (SignUp), login (Login), password recovery (Forgot Password), and a home page (HomePage). Additionally, the project utilizes React Navigation and Google Fonts (Reboto) libraries to enhance the user experience. TypeScript and JavaScript was used for the development of this project.
+This is a React Native application project called Compass-Sales, developed using Expo. The app integrates authentication functionalities using Firebase and Firestore. It includes pages for user registration (SignUp), login (Login), password recovery (Forgot Password), and a home page (HomePage). Additionally, the project utilizes React Navigation Stack library to enhance the user experience. TypeScript and JavaScript was used for the development of this project.
 
 ## Setup
 
@@ -65,13 +65,9 @@ This will start the Expo development server. You can run the app on an emulator 
 
 ## Key Libraries
 
-### React Navigation
+### React Navigation Stack
 
 - Library for routing and navigation in React Native.
-
-### Google Fonts (Reboto)
-
-- Library to use the Reboto font from Google Fonts in your app.
 
 ## Project Structure
 

@@ -68,7 +68,7 @@ export default ForgotPassword;
 const styles = StyleSheet.create({
 
   titleForgotPassword: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     marginTop: 104,
     marginLeft: 14,
     fontSize: 30,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
 
   subtit: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     fontSize: 14,
     width: 343,
     height: 40,
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
   },
 
   inputText: {
+    fontWeight: '400',
     fontSize: 11,
     lineHeight: 12.89,
     width: 30,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
@@ -156,7 +157,6 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontFamily: 'Roboto-Bold',
     color: 'white',
     fontSize: 14,
     fontWeight: '500',

@@ -112,12 +112,12 @@ export default Login;
 const styles = StyleSheet.create({
 
   titleLogin: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     marginTop: 106,
     marginLeft: 14,
-    fontSize: 30,
-    width: 116,
-    height: 40
+    fontSize: 34,
+    width: 126,
+    height: 50
   },
 
   errorMessage: {
@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
   },
 
   inputText: {
+    fontWeight: '400',
     fontSize: 11,
     lineHeight: 12.89,
     width: 30,
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
   },
 
   inputpass: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
@@ -188,16 +189,17 @@ const styles = StyleSheet.create({
   },
 
   ToSignUp: {
-    fontFamily: 'Roboto-Bold',
     width: 161,
     height: 40,
     color: '#222222',
+    fontWeight: '600'
   },
+
   ToForgotPassword: {
-    fontFamily: 'Roboto-Bold',
     width: 161,
     height: 40,
     color: '#222222',
+    fontWeight: '600'
   },
 
   buttonContainer: {
@@ -214,7 +216,6 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontFamily: 'Roboto-Bold',
     color: 'white',
     fontSize: 14,
     fontWeight: '500',

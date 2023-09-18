@@ -4,18 +4,13 @@ import { StackNavigationProp} from "@react-navigation/stack";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../../../FirebaseConfing";
 import {  addDoc, collection } from "firebase/firestore"
-import * as Font from 'expo-font';
-
+import { Feather } from '@expo/vector-icons'
 interface SignUpProps {
   navigation: StackNavigationProp<any, any>;
 }
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Roboto: require('../../../assets/fonts/Roboto-Regular.ttf'),
-    'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
-  });
-};
+
+
 
 
 
@@ -25,9 +20,6 @@ function SignUp({ navigation }: SignUpProps) {
   const [password, setPassword] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadFonts();
-  }, []);
  
   const handleSignUp = async () => {
        try {
@@ -102,8 +94,9 @@ function SignUp({ navigation }: SignUpProps) {
       </View>
 
      
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text  style={styles.ToLogin}>Already have an account?</Text>
+        <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
+          <Text  style={styles.ToLogin}>Already have an account?  <Feather name='arrow-right' color='#F31227' />
+          </Text>
         </TouchableOpacity>
      
       <View style={styles.buttonContainer}>
@@ -122,12 +115,12 @@ export default SignUp;
 const styles = StyleSheet.create({
 
   titleSignUp: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     marginTop: 106,
     marginLeft: 14,
-    fontSize: 30,
-    width: 116,
-    height: 40
+    fontSize: 34,
+    width: 126,
+    height: 50
   },
 
   container: {
@@ -158,6 +151,7 @@ const styles = StyleSheet.create({
   },
 
   inputText: {
+    fontWeight: '400',
     fontSize: 11,
     lineHeight: 12.89,
     width: 30,
@@ -168,7 +162,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
@@ -179,7 +173,7 @@ const styles = StyleSheet.create({
   },
 
   inputpass: {
-    fontFamily: 'Roboto-Bold',
+    fontWeight: '600',
     fontSize: 14,
     flex: 1,
     lineHeight: 20,
@@ -191,14 +185,14 @@ const styles = StyleSheet.create({
   },
 
   ToLogin: {
-    fontFamily: 'Roboto-Bold',
     left: 170,
     marginTop: 20,
-    width: 164,
+    width: 191,
     height: 40,
     color: '#222222',
     textAlign: 'right',
-    fontWeight: '500'
+    fontWeight: '600',
+    flexDirection: 'row',
   },
 
   buttonContainer: {
@@ -215,7 +209,6 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontFamily: 'Roboto-Bold',
     color: 'white',
     fontSize: 14,
     fontWeight: '500',

@@ -5,7 +5,7 @@ This is a React Native application project called Compass-Sales, developed using
 
 ## Setup
 
-Ensure you have Expo CLI installed globally. If not, you can install it using the following command:
+- Ensure you have Expo CLI installed globally. If not, you can install it using the following command:
 
 
 npm install -g expo-cli

@@ -71,7 +71,6 @@ function Login({ navigation }: LoginProps) {
           <TextInput
             style={styles.input}
             autoCapitalize="none"
-            placeholder="Email"
             value={email}
             onChangeText={(text) => setEmail(text)} />
         </View>
@@ -176,7 +175,7 @@ const styles = StyleSheet.create({
     flex: 1,
     lineHeight: 20,
     marginTop: 18,
-    marginLeft: 50,
+    marginLeft: 20,
     width: 51,
     height: 20,
     color: '#2D2D2D'

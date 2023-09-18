@@ -39,7 +39,6 @@ function ForgotPassword(){
           <Text style={styles.inputText}>Email</Text>
           <TextInput
             style={styles.input}
-            placeholder="Email"
             value={email}
             onChangeText={(text) => setEmail(text)} />
         </View>

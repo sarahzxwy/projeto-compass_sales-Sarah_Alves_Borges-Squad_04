@@ -68,7 +68,7 @@ export default ForgotPassword;
 const styles = StyleSheet.create({
 
   titleForgotPassword: {
-    fontWeight: '600',
+    fontWeight: '700',
     marginTop: 104,
     marginLeft: 14,
     fontSize: 30,

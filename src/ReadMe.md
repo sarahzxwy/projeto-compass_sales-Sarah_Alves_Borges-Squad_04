@@ -14,7 +14,7 @@ npm install -g expo-cli
 Clone the repository and navigate to the project directory:
 
 
-git clone https://sarahzxwy/projeto-compass_sales-Sarah_Alves_Borges-Squad_04.git
+git clone https://github.com/sarahzxwy/projeto-compass_sales-Sarah_Alves_Borges-Squad_04.git
 cd Compass-Sales
 
 

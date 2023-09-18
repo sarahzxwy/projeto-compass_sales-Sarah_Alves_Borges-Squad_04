@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import {  signInWithEmailAndPassword } from "firebase/auth"; 
 import { FIREBASE_AUTH } from "../../../FirebaseConfing";
+import { Feather } from '@expo/vector-icons';
 
 type LoginProps = {
   navigation: any;
@@ -30,7 +31,7 @@ function Login({ navigation }: LoginProps) {
       })
       .catch((error) => {
         const errorMessage = error.message;
-        setErrorMessage('Error logging in. Invalid email.');
+        setErrorMessage('Invalid email or password.');
       });
   };
 
@@ -39,7 +40,6 @@ function Login({ navigation }: LoginProps) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-
 
   useEffect(() => {
     
@@ -92,7 +92,8 @@ function Login({ navigation }: LoginProps) {
           <Text style={styles.ToSignUp}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-          <Text  style={styles.ToForgotPassword}>Forgot your password?</Text>
+          <Text  style={styles.ToForgotPassword}>Forgot your password?  <Feather name='arrow-right' color='#F31227' />
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.buttonContainer}>
@@ -106,13 +107,12 @@ function Login({ navigation }: LoginProps) {
   )
 }
 
-
 export default Login;
 
 const styles = StyleSheet.create({
 
   titleLogin: {
-    fontWeight: '600',
+    fontWeight: '700',
     marginTop: 106,
     marginLeft: 14,
     fontSize: 34,
@@ -196,10 +196,11 @@ const styles = StyleSheet.create({
   },
 
   ToForgotPassword: {
-    width: 161,
+    width: 170,
     height: 40,
     color: '#222222',
-    fontWeight: '600'
+    fontWeight: '600',
+    flexDirection: 'row',
   },
 
   buttonContainer: {

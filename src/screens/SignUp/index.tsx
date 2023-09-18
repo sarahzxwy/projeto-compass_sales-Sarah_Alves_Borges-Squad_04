@@ -3,16 +3,12 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { StackNavigationProp} from "@react-navigation/stack";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../../../FirebaseConfing";
-import {  addDoc, collection } from "firebase/firestore"
-import { Feather } from '@expo/vector-icons'
+import {  addDoc, collection } from "firebase/firestore";
+import { Feather } from '@expo/vector-icons';
+
 interface SignUpProps {
   navigation: StackNavigationProp<any, any>;
 }
-
-
-
-
-
 
 function SignUp({ navigation }: SignUpProps) {
   const [username, setName] = useState<string>('');
@@ -36,9 +32,7 @@ function SignUp({ navigation }: SignUpProps) {
         const errorCode = error.code;
         const errorMessage = error.message;
         setErrorMessage("Sign up with a valid email and the password must be at least 6 characters long.");
-       };
-  
-
+       };  
   }
 
   useEffect(() => {
@@ -56,11 +50,10 @@ function SignUp({ navigation }: SignUpProps) {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.titleSignUp}>Sign Up</Text>
+        <Text style={styles.titleSignUp}>Sign up</Text>
       </View>
 
       <View style={styles.boxInput}>
-
       {errorMessage && (
         <Text style={styles.errorText}>{errorMessage}</Text> )}
 
@@ -90,10 +83,8 @@ function SignUp({ navigation }: SignUpProps) {
             onChangeText={(text) => setPassword(text)}
             secureTextEntry={true} />
         </View>
-
       </View>
 
-     
         <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
           <Text  style={styles.ToLogin}>Already have an account?  <Feather name='arrow-right' color='#F31227' />
           </Text>
@@ -115,7 +106,7 @@ export default SignUp;
 const styles = StyleSheet.create({
 
   titleSignUp: {
-    fontWeight: '600',
+    fontWeight: '700',
     marginTop: 106,
     marginLeft: 14,
     fontSize: 34,
